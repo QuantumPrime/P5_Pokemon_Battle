@@ -1,6 +1,6 @@
 function Attack(){
-	this.pokemon = new Pickachu;
-	this.allmoves = new allMoves;
+	//this.pokemon = new Pickachu;
+	//this.allmoves = new allMoves;
 	this.damage1 = 0;
 	this.damage2 = 0;
 	this.fulldamage = 0;
@@ -13,5 +13,4 @@ function Attack(){
 		this.fulldamage = Math.round(this.fulldamage)
 		console.log(this.fulldamage);
 	}
-	
 }
