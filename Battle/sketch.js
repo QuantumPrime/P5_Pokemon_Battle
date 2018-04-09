@@ -1,4 +1,7 @@
 //Pokemon Battle Clone
+
+//Experience webpage 
+//https://bulbapedia.bulbagarden.net/wiki/Experience
 var attack = 0;
 var playerPos = [100, 250]
 var oppPos = [579, 169]
@@ -93,43 +96,34 @@ function update(){
     //Second/Moves selection menu
     if(fightMenu){
         //console.log(inAttack)
-        /*for(var x = 1; x < 3;){
-            if ( inSelect(FightX*x,FightY,FightW,FightH) ){*/
-                if( inSelect(FightX,FightY,FightW,FightH) ){
-                    inAttack = true;
-                    attack1 = true;
-                }else if( inSelect(FightX*1.5,FightY,FightW,FightH) ){
-                    inAttack = true;
-                    attack1 = false;
-                    attack2 = true;
-                    attack3 = false;
-                    attack4 = false;
-                }else if( inSelect(FightX*2,FightY,FightW,FightH) ){
-                    inAttack = true;
-                    attack1 = false;
-                    attack2 = false;
-                    attack3 = true;
-                    attack4 = false;
-                }else if( inSelect(FightX*2,FightY,FightW,FightH) ){
-                    inAttack = true;
-                    attack1 = false;
-                    attack2 = false;
-                    attack3 = false;
-                    attack4 = true;
-                }else{
-                    inAttack = false;
-                    attack1 = false;
-                    attack2 = false;
-                    attack3 = false;
-                    attack4 = false;  
-                }
-                
-            /*}else{
-                inAttack = false;
-                    
-            }*/
-        //x+=0.5
-         
+        if( inSelect(FightX,FightY,FightW,FightH) ){
+            inAttack = true;
+            attack1 = true;
+        }else if( inSelect(FightX*1.5,FightY,FightW,FightH) ){
+            inAttack = true;
+            attack1 = false;
+            attack2 = true;
+            attack3 = false;
+            attack4 = false;
+        }else if( inSelect(FightX*2,FightY,FightW,FightH) ){
+            inAttack = true;
+            attack1 = false;
+            attack2 = false;
+            attack3 = true;
+            attack4 = false;
+        }else if( inSelect(FightX*2,FightY,FightW,FightH) ){
+            inAttack = true;
+            attack1 = false;
+            attack2 = false;
+            attack3 = false;
+            attack4 = true;
+        }else{
+            inAttack = false;
+            attack1 = false;
+            attack2 = false;
+            attack3 = false;
+            attack4 = false;  
+        }
     }
 }
 
