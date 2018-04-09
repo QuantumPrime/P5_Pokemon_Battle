@@ -31,7 +31,7 @@ class Pickachu{
         this.health = this.maxHealth
         this.allmoves = new allMoves;
         this.pokeType = "Electric";
-        this.moves = ["Tackle", "ThunderShock", "hold3", "hold4"];
+        this.moves = ["Tackle", "Thunder Shock", "hold3", "hold4"];
         this.update(0);
     }
     
@@ -114,8 +114,8 @@ class Pickachu{
 
             //attackPP = allmoves.Tackle.Pow
             //attackPP = allmoves.Tackle.PP;
-        }else if( move == "ThunderShock"){
-            if(allmoves.ThunderShock.attackType == this.pokeType){
+        }else if( move == "Thunder Shock"){
+            if(allmoves.ThunderShock.Type == this.pokeType){
                 stabMod = 1.5;
             }else{
                 stabMod = 1;
@@ -130,7 +130,7 @@ class Pickachu{
             if(attackPP < 0){
                 attackPP = 0
             }
-        }else if(move == "ThunderShock"){
+        }else if(move == "Thunder Shock"){
             attackPP = allmoves.ThunderShock.PP - sub;
             if(attackPP < 0){
                 attackPP = 0
