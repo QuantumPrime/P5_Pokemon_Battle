@@ -37,14 +37,14 @@ class Pickachu{
     
     show(){
         rectMode(CORNER);
-        w = 190*this.BarMod;
+        w = 175*this.BarMod;
         noStroke();
         fill(10,194,20);
-        rect(2,248, w ,12);
+        rect(2,248, w ,9);
         noFill();
         stroke(0);
         strokeWeight(3);
-        rect(2,248,190,12);
+        rect(2,248,175,9);
         fill(255);
         textSize(21);
         textAlign(LEFT);
