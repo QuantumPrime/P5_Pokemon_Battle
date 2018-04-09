@@ -1,3 +1,4 @@
+//Pokemon Battle Clone
 var attack = 0;
 var playerPos = [100, 250]
 var oppPos = [579, 169]
@@ -66,7 +67,6 @@ function mousePressed(){
             PPMod[1]++
             pika.moveDamage(pika.moves[1]);
             attackCalc.attackProp(pika.moves[1], attackPower, pika.level, pika.attack, 35 , stabMod);
-            console.log("here");
         }
 
     }
