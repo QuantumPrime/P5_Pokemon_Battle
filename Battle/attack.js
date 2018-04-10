@@ -13,5 +13,6 @@ function Attack(){
 		this.fulldamage = (((this.damage1 * this.damage2)/(50)) + 2) * modifier;
 		this.fulldamage = Math.round(this.fulldamage)
 		console.log(this.fulldamage);
+		attack = this.fulldamage;
 	}
 }
