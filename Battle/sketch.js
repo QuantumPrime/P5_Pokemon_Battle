@@ -65,11 +65,11 @@ function mousePressed(){
         if(attack1){
             PPMod[0]++;
             pika.moveDamage(pika.moves[0]);
-            attackCalc.attackProp(pika.moves[0], attackPower, pika.level, pika.attack, 35, stabMod);
+            attackCalc.attackProp(attackPower, pika.level, pika.attack, 35, stabMod);
         }else if(attack2){
             PPMod[1]++
             pika.moveDamage(pika.moves[1]);
-            attackCalc.attackProp(pika.moves[1], attackPower, pika.level, pika.attack, 35 , stabMod);
+            attackCalc.attackProp(attackPower, pika.level, pika.attack, 35 , stabMod);
         }
 
     }
