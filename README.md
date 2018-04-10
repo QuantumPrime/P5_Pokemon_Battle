@@ -22,6 +22,8 @@ A small Pokemon Clone being made in p5.JS.
 
 * Add opponent AI
 
+* Add possiblity to level
+
 * Add 6 pokemon on each side. (Pokemon TBD)
 
 * Make transfering between 2 pokemon possible (and work smooth)
