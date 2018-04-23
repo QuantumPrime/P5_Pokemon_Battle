@@ -4,81 +4,132 @@
 //https://bulbapedia.bulbagarden.net/wiki/Experience
 var attack = 0;
 var playerPos = [100, 250]
-var oppPos = [579, 169]
+var oppPos = [550, 169]
+var PPMod = [0,0,0,0];
+var AICalcDamage = [];
+var stabMod = 1;
+var attack1, attack2, attack3, attack4;
+var oppAttack;
+var attackPower, attackPP, oppAttackPow;
+var playerAttack = false;
+var playerTurn = true;
+var showingRect = true;
 var mainFight = true;
 var fightMenu = false;
 var inAttack = false;
-var PPMod = [0,0,0,0];
-var stabMod = 1;
-var attack1, attack2, attack3, attack4;
-var attackPower, attackPP;
-var attack;
+var mayAttack = false;
 var FightX = 299;
 var FightY = 308;
 var FightW = 100;
 var FightH = 40;
 var inFightBox = false;
+var attackType
+var moveType;
+var attMove;
 
 //var bg;
 //var pickachu;
 var w;
 
 function preload(){
-    bg = loadImage("assets/map.png");
+    bg = loadImage("assets/map.png");                       
     ratImg = loadImage("assets/ratFar.png");
     pikaImg = loadImage("assets/pickachu.png");
 }
 
 function setup() {
+
     createCanvas(800,400);
 
     allmoves = new allMoves   
     rat = new Rattata; 
     pika = new Pickachu;
-    attackCalc = new Attack;
-    //291, 308
+    attacks = new Attacks();
     
 }
 
 function draw() {
-    //update()
+    //console.log(attack);
     background(bg);
-    update();
-    if(mainFight){
-        showBattleMenu(165, 3, 3);
-    }else if(fightMenu){
-        showFightMenu(0, 108, 204);
+    //sleep(4000);
+    if(playerTurn){
+        update();
+    
+        if(mainFight){
+            showBattleMenu(165, 3, 3); 
+        }else if(fightMenu){
+            showFightMenu(0, 108, 204);
+        }
+        //attacks.ShowPMove();
+        if(playerAttack){
+            // console.log("If 1")
+            //setInterval(attacks.ShowPMove(), );
+            showingRect = true;
+            playerTurn = false;
+            playerAttack = false;
+            setTimeout(removeRect, 3000);
+        }
+    }else{
+        // console.log("else 1")
+        if(showingRect){
+            // console.log("If 2")
+            attacks.ShowPMove();  
+        }
+        //console.log(mayAttack);
+        if(mayAttack){
+            attack = 0;
+            attacks.oppAttack();
+            for(let x = 0; x<4; x++){
+                attacks.attackProp(attacks.AIDamage[x], rat.level, rat.attack, pika.defence, stabMod);
+                AICalcDamage.push(oppAttack);
+            }
+            attack = Math.max.apply(null, AICalcDamage);
+            attacks.oppMove(attack, rat.moves, AICalcDamage);
+            //console.log(attack);
+            //console.log("Attack: " + attMove);
+            pika.update(attack);
+            attack = 0;
+            
+            //playerAttack = false;
+            mainFight = true;
+            playerTurn = true;
+            AICalcDamage = [];
+            mayAttack = false;
+        }
     }
     pika.show();
-    pika.update(attack);
-    rat.show();
-    rat.update(attack);
-    //rat.update();
+    rat.show();     
 }   
 
 function mousePressed(){
-    if(inFightBox){
-        mainFight = false;
-        fightMenu=true;
-    }
-    if(inAttack){
-        if(attack1){
-            PPMod[0]++;
-            pika.moveDamage(pika.moves[0]);
-            attackCalc.attackProp(attackPower, pika.level, pika.attack, 35, stabMod);
-        }else if(attack2){
-            PPMod[1]++
-            pika.moveDamage(pika.moves[1]);
-            attackCalc.attackProp(attackPower, pika.level, pika.attack, 35 , stabMod);
+    if(playerTurn){
+        if(inFightBox){
+            mainFight = false;
+            fightMenu=true;
         }
-
+        if(inAttack){
+            //mainFight = false;
+            inAttack = false;
+            fightMenu = false;
+            playerAttack = true;
+            if(attack1){
+                PPMod[0]++;
+                pika.moveDamage(pika.moves[0]);
+                playerMove = pika.moves[0];
+                attacks.attackProp(attackPower, pika.level, pika.attack, rat.defence, stabMod);
+            }else if(attack2){
+                PPMod[1]++
+                pika.moveDamage(pika.moves[1]);
+                playerMove = pika.moves[1];
+                attacks.attackProp(attackPower, pika.level, pika.attack, rat.defence, stabMod);
+            }
+        }
     }
-    
 }
 
 
 function update(){
-     //console.log(mouseX);
+    stabMod = 0
     //First Menu
     if( inSelect(FightX,FightY,FightW,FightH) ){
         inFightBox = true;
@@ -156,7 +207,6 @@ function showFightMenu(r,g,b){
     strokeWeight(2);
     for(var i = 1; i<3;){
         for(var m = 0; m<4; m++){
-            //console.log(pika.moves[m]);
             fill(r,g,b);
             rect(FightX*i, FightY, FightW, FightH);
             fill(255);
@@ -169,4 +219,13 @@ function showFightMenu(r,g,b){
             i+=.5;
         }
     }
+}
+
+
+function removeRect(){
+    console.log("here");
+    //playerTurn = true;
+    rat.update(attack);
+    mayAttack = true;
+    showingRect = false;
 }
