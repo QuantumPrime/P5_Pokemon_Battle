@@ -46,9 +46,12 @@ class Pickachu{
         strokeWeight(3);
         rect(2,248,175,9);
         fill(255);
-        textSize(21);
+        textSize(17);
         textAlign(LEFT);
+        stroke(1);
         text(this.pokName + "   " + "Lvl: "+ this.level, 2, 244);
+        //180, 259
+        text("HP: " + this.health, 180, 259);
         image(pikaImg, playerPos[0], playerPos[1]);
     }
     update(damage){
@@ -121,6 +124,8 @@ class Pickachu{
                 stabMod = 1;
             }
             attackPower = allmoves.ThunderShock.Pow;
+        }else{
+            attackPower = 0;
         }
     }
 
