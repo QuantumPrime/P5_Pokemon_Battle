@@ -1,5 +1,6 @@
 class Rattata{
 	 constructor(){
+
         this.pokName = "Rattata"
 
         this.HealthEV = 0;
@@ -33,12 +34,13 @@ class Rattata{
         this.pokeType = "Normal"
     
         
-        //this.mult = 100.0/35.0;
-        //this.BarMod = (this.health * this.mult)/100;
-        this.moves = ["Tackle", "Tail Whip", "hold3", "hold4"];
-        //this.moveProps(this.moves[0],this.moves[1],this.moves[2],this.moves[3]);
+        this.moves = ["Tackle", "Tail Whip", "Body Slam", "hold4"];
+        this.movesPP = [];
+        this.movePP();
         this.update(0);
     }
+
+
     show(){
     	//Rect W= 201 H = 10, X = 620, Y = 189
     	//PosX = 587 PosY = 231
@@ -56,13 +58,12 @@ class Rattata{
         strokeWeight(3);
         rect(615,151,175,8);
         fill(255);
-        textSize(16);
+        textSize(15);
         textAlign(LEFT);
         text(this.pokName + "   " + "Lvl: "+ this.level, 615, 147);
     	image(ratImg, oppPos[0], oppPos[1]);
 
     }
-
 
     calcStats(){
         //https://cdn.bulbagarden.net/upload/d/d4/HP_calc.png
@@ -71,7 +72,7 @@ class Rattata{
         this.maxHealth2 = sqrt(this.HealthEV)/4;
         this.maxHealth = ((this.maxHealth1 * 2 + this.maxHealth2 * this.level)/100) + this.level + 10;
         this.maxHealth = Math.round(this.maxHealth);
-        //console.log(this.maxHealth);
+        //xthis.maxHealth);
 
         //https://cdn.bulbagarden.net/upload/d/d6/Statcalc_gen12.png
         //attack Calculations
@@ -107,11 +108,49 @@ class Rattata{
         //console.log("Speed " + this.Speed);
     }
 
+    moveDamage(move){
+        if(move == "Tackle"){
+            if(allmoves.Tackle.attackType == this.pokeType){
+                stabMod = 1.5;
+            }else{
+                stabMod = 1;
+            }
+            oppAttackPow = allmoves.Tackle.Pow;
+        }else if(move == "Body Slam"){
+            //console.log("here");
+            if(allmoves.BodySlam.attackType == this.pokeType){
+                stabMod = 1.5
+            }else{
+                stabMod = 1;
+            }
+            oppAttackPow = allmoves.BodySlam.Pow;
+            //console.log(oppAttackPow);
+        }else{
+            oppAttackPow = 0;
+        }
+    }
+
+    movePP(){
+        for(let x = 0; x<4; x++){
+            if(this.moves[x] == "Tackle"){
+                this.movesPP.push(allmoves.Tackle.PP)
+            }else if(this.moves[x] == "Tail Whip"){
+                this.movesPP.push(allmoves.TailWhip.PP)
+            }else if(this.moves[x] == "Body Slam"){
+                this.movesPP.push(allmoves.BodySlam.PP)
+            }else{
+                this.movesPP.push(0);
+            }
+        }
+    }
+
+
      update(damage){
+        //console.log(damage);
         this.health -= damage;
-        //this.BarMod = ((this.health-damage) * this.mult)/100;
-        this.BarMod = this.health/this.maxHealth;
-        if(this.BarMod<= 0){
+        this.BarMod = this.health/this.maxHealth;       
+        // console.log(this.health);
+        if(this.BarMod <= 0){
             this.BarMod = 0;
         }
     }
